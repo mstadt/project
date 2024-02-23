@@ -1,5 +1,14 @@
+IC_PD <- function() {
+    # Initial conditions for PD model
+    list(
+        Cmplx = 0, # number of CAR-Target Complexes per tumor cells
+        Nt = 1e5, # cells, tumor cells
+        Ne = 1e5, # cells, CAR-T cells (unsure see Eq. 3 of supp mat)
+    )
+}
+
 init_conds <- function(){
-    # Initial conditions
+    # Initial conditions for MOnolix
     list(
         CARTe_PB = 0, # effector cell pool concentration in blood (cells/L)
         CARTm_PB = 0, # memory cell pool concentration in blood (cells/L)

@@ -1,3 +1,18 @@
+params_PD <- function() {
+    # Set parameters for the PD model
+    list(
+        MV = 1e-2, # media volume in L (GUESSED)
+        K_on_CAR = 7.1e4, # (1/Molar/sec) binding affinity of CAR to TAA (Tab 1, PD mod)
+        K_off_CAR = 2.39e-3, # (1/sec) dissociation rate of CAR to TAA (Tab 1, PD mod)
+        Ag_CAR = 15000, # numbers/CARTcell, overall density of CARs on CAR-T cells (Tab 1, PD mod)
+        Ag_tumor = 222, # JeKo value (TODO: try others), (Tab 1, PD mod)
+        Kkill_max = 0.353, # 1/hour # maximum rate of killing of tumor cells by CAR-T cells (Tab 1, PD mod)
+        KC50_CART = 2.24, # (number/cell) (Tab 1, PD mod)
+        DT_tumor = 26, # (hour), doubling time of tumor cells (Tab 1, PD mod, JeKo value)
+        DT_CART = 24, # (hour), double time of CART cells
+    )
+}
+
 fixed_params <- function() {
     Kon_orig = 7.103E+4  # 1/M/s
     Koff_orig = 2.385e-3 # 1/s
@@ -28,6 +43,7 @@ varied_params <- function() {
         Kkill_max0 = 0.343 # Table 1 mean PKPD
     )
 }
+
 
 
 # TODO: 

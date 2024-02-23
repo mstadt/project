@@ -1,5 +1,6 @@
 model_eqns <- function(t,y,params) {
     # Model equations
+    # These model equations are based on the monolix code...
 
     # variable names
     CARTe_PB <- y[1] # effector cell pool concentration in blood (cells/L)

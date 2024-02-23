@@ -1,0 +1,60 @@
+# Driver file for running model_PD
+# Run the model
+library(deSolve)
+library(ggplot2)
+library(RColorBrewer)
+#library(gridExtra)
+
+# get relevant functions
+source("setparams.r")
+source("model_PD.r")
+source("initconds.r")
+
+# get initial condition
+IC <- unlist(IC_PD())
+
+# get parameters
+pars <- params_PD()
+
+# simulation time
+t0 = 0 # start time
+tf = 500 # final time (days)
+times = seq(t0,tf,1)
+
+# set up model
+mod <- list(init = IC,
+                params = pars,
+                model = model_PD)
+
+# Model simulation
+out1 <- as.data.frame(lsoda(
+            IC,
+            times,
+            mod$model,
+            mod$params,
+            rtol = 1e-10,
+            atol = 1e-10
+            ))
+
+
+# Plot results
+
+# Figure specs
+my_palette <- brewer.pal(5, "Dark2")
+cid = 1 # color id
+lw = 1.0 # linewidth
+
+pltNt <- ggplot() +
+        geom_line(data = out1, aes(x = time, y = Nt), colour = my_palette[cid], linewidth = lw) + # plot TumorT from out
+        labs(title = "Tumor cells", # title
+                y = "N_t (cells)") + # ylabel
+        theme_bw() +
+        theme(panel.grid.major = element_line(colour = "grey", linewidth = 0.3),
+                panel.grid.minor = element_line(colour = "grey", linewidth = 0.3))
+
+ggsave("plotNt.png", plot = pltT, width = 4, height = 4, dpi = 300)
+
+
+
+
+
