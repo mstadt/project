@@ -1,7 +1,7 @@
 params_PD <- function() {
     # Set parameters for the PD model
     list(
-        MV = 1e-2, # media volume in L (GUESSED)
+        MV = 1e-6, # media volume in L (GUESSED)
         K_on_CAR = 7.1e4, # (1/Molar/sec) binding affinity of CAR to TAA (Tab 1, PD mod)
         K_off_CAR = 2.39e-3, # (1/sec) dissociation rate of CAR to TAA (Tab 1, PD mod)
         Ag_CAR = 15000, # numbers/CARTcell, overall density of CARs on CAR-T cells (Tab 1, PD mod)
@@ -10,6 +10,20 @@ params_PD <- function() {
         KC50_CART = 2.24, # (number/cell) (Tab 1, PD mod)
         DT_tumor = 26, # (hour), doubling time of tumor cells (Tab 1, PD mod, JeKo value)
         DT_CART = 24 # (hour), double time of CART cells
+    )
+}
+
+params_preclin_PKPD <- function() {
+    # set parameters for preclinical PK-PD model
+    list(
+        K12       = 20304, # (1/day) distribution rate from blood to bone marrow compartment
+        Vb        = 0.944, # (mL) blood volume
+        K21       = 0.3288, # (1/day) redistribution rate from bone marrow to blood compartment
+        Vt        = 0.151, # (mL) volume of tumor compartment (or bone marrow?)
+        Kel_e     = 113, # (1/day) elimination rate of effector CARTe (tab 1)
+        Kel_m     = 0.219, # not given in pre-clin PKPD....this is from other part...
+        Kexp_max  = 0.9168, # (1/day) max rate of CART cells expansion
+        Rm        = 0.0002 # guess from Tab 1...
     )
 }
 

@@ -1,3 +1,13 @@
+IC_prePKPD <- function() {
+    # Initial conditions for pre-clinical PKPD model
+    list(
+        CARTe_PB = 0, # SHOULD BE DOSE WHEN I GET THERE (or do LSODA events process...)
+        CARTm_PB = 0, # from supp mat
+        CARTe_T  = 0, # from supp mat
+        CARTm_T  = 0 # from supp mat
+    )
+}
+
 IC_PD <- function() {
     # Initial conditions for PD model
     list(
