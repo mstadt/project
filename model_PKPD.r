@@ -20,7 +20,7 @@ model_PKPD <- function(t,y,params) {
 
         # Tissue compartment (Bone marror or solid tumor)
         #CplxCART = Cplx/Tumor
-        Kexp = 0.5 * Kexp_max # FOR NOW.... #(Kexp_max * CplxCART) / (EC50_exp + CplxCART) 
+        Kexp = 0.1 * Kexp_max # FOR NOW.... #(Kexp_max * CplxCART) / (EC50_exp + CplxCART) 
         # ddt_CARTe_T
         dydt[3] <- (K12*Vb*CARTe_PB - K21*Vt*CARTe_T)/Vt + Kexp*CARTe_T - Rm*CARTe_T
 

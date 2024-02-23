@@ -2,7 +2,7 @@
 library(deSolve)
 library(ggplot2)
 library(RColorBrewer)
-#library(gridExtra)
+library(gridExtra)
 
 # get relevant functions
 source("setparams.r")
@@ -11,28 +11,35 @@ source("initconds.r")
 
 # get initial condition
 IC <- unlist(IC_prePKPD())
+#dose = 1e-10
+#IC[1] = dose
 
 # get parameters
 pars <- params_preclin_PKPD()
 
-# simulation time
-t0 = 0 # start time
-tf = 500 # final time (days)
-times = seq(t0,tf,1)
+# events (doses)
+dose_times = c(0) # when to do dose
+dose_amts = c(1e-6) # dose amounts
+events <- data.frame(var = 1, # index for CARTe_PB in the state vector y
+                     time = dose_times,
+                     value = dose_amts, # dose concentration
+                     method = "add")
 
-# set up model
-mod <- list(init = IC,
-                params = pars,
-                model = model_PKPD)
+# simulation time
+t0 = -1 # start time
+tf = 10 # final time (days)
+times = seq(t0,tf,1)
+times = unique(sort(c(times, dose_times)))
 
 # Model simulation
 out1 <- as.data.frame(lsoda(
-            IC,
-            times,
-            mod$model,
-            mod$params,
+            y = IC,
+            times = times,
+            func = model_PKPD, # PKPD model
+            parms = pars,
             rtol = 1e-10,
-            atol = 1e-10
+            atol = 1e-10,
+            events = list(data = events) # add doses
             ))
 
 
@@ -84,7 +91,11 @@ pltCARTm_T <- ggplot() +
 
 ggsave("plotCARTm_T.png", plot = pltCARTm_T, width = 4, height = 4, dpi = 300)
 
-
+# put plots on a grid
+combined_plots <- grid.arrange(pltCARTe_PB, pltCARTm_PB, pltCARTe_T, pltCARTm_T, 
+                                    ncol = 2, nrow = 2)
+# save combined plots as PNG file
+ggsave("plotCARTall.png", plot = combined_plots, width = 10, height = 10, dpi = 300)                                
 
 
 
