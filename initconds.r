@@ -3,7 +3,7 @@ IC_PD <- function() {
     list(
         Cmplx = 0, # number of CAR-Target Complexes per tumor cells
         Nt = 1e5, # cells, tumor cells
-        Ne = 1e5, # cells, CAR-T cells (unsure see Eq. 3 of supp mat)
+        Ne = 0 # cells, CAR-T cells (unsure see Eq. 3 of supp mat)
     )
 }
 

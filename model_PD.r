@@ -12,8 +12,7 @@ model_PD <- function(t,y,params) {
 
         # Cmplx
         # ddt_Cmplx
-        dydt[1] <- K_on_CAR * (Ag_CAR - Cmplx) * (Ag_tumor - Cmplx) \
-                        - K_off_CAR * Cmplx
+        dydt[1] <- K_on_CAR * (Ag_CAR - Cmplx) * (Ag_tumor - Cmplx) - K_off_CAR * Cmplx
 
         # Tumor cells
         # ddt_Nt
@@ -24,6 +23,9 @@ model_PD <- function(t,y,params) {
 
         # CAR-T cells
         # ddt_NE
-        dydt[3] <- log(2)/DT_CART * NE
+        dydt[3] <- log(2)/DT_CART * Ne
+
+        # list of ODES
+        list(c(dydt))
     })
 }

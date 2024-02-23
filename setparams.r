@@ -9,7 +9,7 @@ params_PD <- function() {
         Kkill_max = 0.353, # 1/hour # maximum rate of killing of tumor cells by CAR-T cells (Tab 1, PD mod)
         KC50_CART = 2.24, # (number/cell) (Tab 1, PD mod)
         DT_tumor = 26, # (hour), doubling time of tumor cells (Tab 1, PD mod, JeKo value)
-        DT_CART = 24, # (hour), double time of CART cells
+        DT_CART = 24 # (hour), double time of CART cells
     )
 }
 

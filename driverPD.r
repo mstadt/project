@@ -52,9 +52,27 @@ pltNt <- ggplot() +
         theme(panel.grid.major = element_line(colour = "grey", linewidth = 0.3),
                 panel.grid.minor = element_line(colour = "grey", linewidth = 0.3))
 
-ggsave("plotNt.png", plot = pltT, width = 4, height = 4, dpi = 300)
+ggsave("plotNt.png", plot = pltNt, width = 4, height = 4, dpi = 300)
 
 
+pltCmplx <- ggplot() +
+        geom_line(data = out1, aes(x = time, y = Cmplx), colour = my_palette[cid], linewidth = lw) + # plot TumorT from out
+        labs(title = "Complex", # title
+                y = "Cmplx") + # ylabel
+        theme_bw() +
+        theme(panel.grid.major = element_line(colour = "grey", linewidth = 0.3),
+                panel.grid.minor = element_line(colour = "grey", linewidth = 0.3))
 
+ggsave("plotCmplx.png", plot = pltCmplx, width = 4, height = 4, dpi = 300)
+
+pltNe <- ggplot() +
+        geom_line(data = out1, aes(x = time, y = Ne), colour = my_palette[cid], linewidth = lw) + # plot TumorT from out
+        labs(title = "CART cells", # title
+                y = "Ne (cells)") + # ylabel
+        theme_bw() +
+        theme(panel.grid.major = element_line(colour = "grey", linewidth = 0.3),
+                panel.grid.minor = element_line(colour = "grey", linewidth = 0.3))
+
+ggsave("plotNe.png", plot = pltNe, width = 4, height = 4, dpi = 300)
 
 
