@@ -2,7 +2,7 @@
 library(deSolve)
 library(ggplot2)
 library(RColorBrewer)
-#library(gridExtra)
+library(gridExtra)
 
 # get relevant functions
 source("setparams.r")
@@ -16,16 +16,16 @@ IC <- unlist(init_conds())
 fixed_pars <- fixed_params()
 varied_pars <- varied_params() # input parameters
 
-# change parameters here
-fixed_pars$Kgtumor0 = 0
-varied_pars$Kkill_max0 = 0
+# # change parameters here
+# fixed_pars$Kgtumor0 = 0
+# varied_pars$Kkill_max0 = 0
 
 # put params in one list
 pars <- c(fixed_pars, varied_pars)
 
 # simulation time
-t0 = 0 # start time
-tf = 500 # final time (days)
+t0 = -2 # start time
+tf = 10 # final time (days)
 times = seq(t0,tf,1)
 
 # set up model
@@ -111,5 +111,9 @@ pltCplx_T <- ggplot() +
 
 ggsave("plotCplx_T.png", plot = pltCplx_T, width = 4, height = 4, dpi = 300)
 
-
+# put plots on a grid
+combined_plots <- grid.arrange(pltCARTe_PB, pltCARTm_PB, pltCARTe_T, pltCARTm_T, 
+                                    ncol = 2, nrow = 2)
+# save combined plots as PNG file
+ggsave("plotCARTall.png", plot = combined_plots, width = 10, height = 10, dpi = 300)
 

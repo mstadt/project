@@ -10,11 +10,10 @@ source("model_PKPD.r")
 source("initconds.r")
 
 # get initial condition
-IC <- unlist(IC_prePKPD())
-#IC['CARTe_T'] = 1e-6 # need something otherwise get numerical errors...
+IC <- unlist(IC_clinPKPD())
 
 # get parameters
-pars <- params_preclin_PKPD()
+pars <- params_clin_PKPD()
 
 # events (doses)
 dose_times = c(0) # when to do dose
