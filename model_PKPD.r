@@ -15,14 +15,18 @@ model_PKPD <- function(t,y,params) {
 
         # Peripheral blood compartment
         # ddt_CARTe_PB
-        dydt[1] <- (-K12*Vb*CARTe_PB + K21*Vt*CARTe_T)/Vb - Kel_e*CARTe_PB
+        dydt[1] <- (doseCART -K12*Vb*CARTe_PB + K21*Vt*CARTe_T)/Vb - Kel_e*CARTe_PB
 
         # ddt_CARTm_PB
         dydt[2] <- (-K12*Vb*CARTm_PB + K21*Vt*CARTm_T)/Vb  - Kel_m*CARTm_PB
 
-        # Tissue compartment (Bone marror or solid tumor)
+        # Tissue compartment (Bone marrow or solid tumor)
+        if ((CARTe_T + CARTm_T) > 0) {
         CplxCART = Cplx / (CARTe_T + CARTm_T)
         Kexp = (Kexp_max * CplxCART) / (EC50_exp + CplxCART)
+        } else {
+            Kexp = 0
+        }
         # ddt_CARTe_T
         dydt[3] <- (K12*Vb*CARTe_PB - K21*Vt*CARTe_T)/Vt + Kexp*CARTe_T - Rm*CARTe_T
 

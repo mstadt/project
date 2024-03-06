@@ -3,7 +3,7 @@ IC_prePKPD <- function() {
     list(
         CARTe_PB = 0, # SHOULD BE DOSE WHEN I GET THERE (or do LSODA events process...)
         CARTm_PB = 0, # from supp mat
-        CARTe_T  = 1e-12, # needs to be nonzero to prevent numerical issues with tumor growth...
+        CARTe_T  = 0, #1e-12, # needs to be nonzero to prevent numerical issues with tumor growth...
         CARTm_T  = 0, # from supp mat
         Cplx     = 0, # from supp mat
         Tumor    = 1e5 # tumor size (Tab 1)
@@ -15,7 +15,7 @@ IC_clinPKPD <- function() {
     list(
         CARTe_PB = 0, # SHOULD BE DOSE WHEN I GET THERE (or do LSODA events process...)
         CARTm_PB = 0, # from supp mat
-        CARTe_T  = 1e-6, # needs to be nonzero to prevent numerical issues with tumor growth...
+        CARTe_T  = 0, #1e-50, # needs to be nonzero to prevent numerical issues with tumor growth...
         CARTm_T  = 0, # from supp mat
         Cplx     = 0, # from supp mat
         Tumor    = 1e5 # tumor size (Tab 1)
