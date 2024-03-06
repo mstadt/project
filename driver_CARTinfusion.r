@@ -20,8 +20,8 @@ pars <- params_clin_PKPD()
 
 
 # simulation time
-t0 = 0 # start time
-tf = 10 # final time (days)
+t0 = -10 # start time
+tf = 0 # final time (days)
 times1 = seq(t0,tf,(tf-t0)/50)
 
 pars1 = pars
@@ -42,7 +42,7 @@ out1 <- as.data.frame(lsoda(
                         ))
 print('sim 1 done')
 
-dose_total = 150e6 # total dose
+dose_total = 800e6 # total dose
 inf_hrs = 4 # hours of infusion
 pars2 <- pars
 pars2$doseCART = dose_total / (inf_hrs/24) # dose amount per day
